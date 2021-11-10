@@ -30,6 +30,7 @@ import me.chanjar.weixin.open.bean.minishop.limitdiscount.LimitDiscountSku;
 import me.chanjar.weixin.open.bean.result.*;
 import me.chanjar.weixin.open.util.json.WxOpenGsonBuilder;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -493,7 +494,13 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
 
   @Override
   public List<WxOpenMaCodeTemplate> getTemplateList() throws WxErrorException {
-    String responseContent = get(GET_TEMPLATE_LIST_URL, "access_token");
+    return getTemplateList(null);
+  }
+
+  @Override
+  public List<WxOpenMaCodeTemplate> getTemplateList(@Nullable Integer templateType) throws WxErrorException {
+    String url = GET_TEMPLATE_LIST_URL + (templateType == null ? "" : "?template_type=" + templateType);
+    String responseContent = get(url, "access_token");
     JsonObject response = GsonParser.parse(StringUtils.defaultString(responseContent, "{}"));
     boolean hasTemplateList = response.has("template_list");
     if (hasTemplateList) {
@@ -617,6 +624,34 @@ public class WxOpenComponentServiceImpl implements WxOpenComponentService {
     jsonObject.addProperty("legal_persona_name", legalPersonaName);
     String response = post(FAST_REGISTER_WEAPP_SEARCH_URL, jsonObject.toString(), "component_access_token");
     return WxOpenGsonBuilder.create().fromJson(response, WxOpenResult.class);
+  }
+
+  @Override
+  public WxOpenRegisterPersonalWeappResult fastRegisterPersonalWeapp(String idname, String wxuser, String componentPhone) throws WxErrorException {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("idname", idname);
+    jsonObject.addProperty("wxuser", wxuser);
+    jsonObject.addProperty("component_phone", componentPhone);
+    String response = post(FAST_REGISTER_PERSONAL_WEAPP_URL, jsonObject.toString(), "component_access_token");
+    return WxOpenGsonBuilder.create().fromJson(response, WxOpenRegisterPersonalWeappResult.class);
+  }
+
+  @Override
+  public WxOpenRegisterPersonalWeappResult fastRegisterPersonalWeappSearch(String taskid) throws WxErrorException {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("taskid", taskid);
+    String response = post(FAST_REGISTER_PERSONAL_WEAPP_SEARCH_URL, jsonObject.toString(), "component_access_token");
+    return WxOpenGsonBuilder.create().fromJson(response, WxOpenRegisterPersonalWeappResult.class);
+  }
+
+  @Override
+  public WxOpenRegisterBetaWeappResult fastRegisterBetaWeapp(String name, String openid) throws WxErrorException {
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.addProperty("name", name);
+    jsonObject.addProperty("openid", openid);
+    String response = wxOpenService.getWxOpenComponentService()
+      .post(FAST_REGISTER_BETA_WEAPP_URL, jsonObject.toString(), "access_token");
+    return WxOpenGsonBuilder.create().fromJson(response, WxOpenRegisterBetaWeappResult.class);
   }
 
   @Override

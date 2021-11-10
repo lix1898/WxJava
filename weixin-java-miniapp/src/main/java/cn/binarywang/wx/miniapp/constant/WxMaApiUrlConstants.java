@@ -226,6 +226,10 @@ public class WxMaApiUrlConstants {
     String GENERATE_URLLINK_URL = "https://api.weixin.qq.com/wxa/generate_urllink";
   }
 
+  public interface ShortLink {
+    String GENERATE_SHORT_LINK_URL = "https://api.weixin.qq.com/wxa/genwxashortlink";
+  }
+
   public interface SecCheck {
     String IMG_SEC_CHECK_URL = "https://api.weixin.qq.com/wxa/img_sec_check";
     String MSG_SEC_CHECK_URL = "https://api.weixin.qq.com/wxa/msg_sec_check";
@@ -311,6 +315,7 @@ public class WxMaApiUrlConstants {
       String SPU_UPDATE_WITHOUT_URL = "https://api.weixin.qq.com/shop/spu/update_without_audit";
       String SPU_LISTING_URL = "https://api.weixin.qq.com/shop/spu/listing";
       String SPU_DELISTING_URL = "https://api.weixin.qq.com/shop/spu/delisting";
+      String DEL_AUDIT_URL = "https://api.weixin.qq.com/shop/spu/del_audit";
     }
 
     interface Order {
@@ -318,6 +323,47 @@ public class WxMaApiUrlConstants {
       String ORDER_ADD = "https://api.weixin.qq.com/shop/order/add";
       String ORDER_PAY = "https://api.weixin.qq.com/shop/order/pay";
       String ORDER_GET = "https://api.weixin.qq.com/shop/order/get";
+    }
+
+    interface Register {
+      String REGISTER_APPLY = "https://api.weixin.qq.com/shop/register/apply";
+      String REGISTER_CHECK = "https://api.weixin.qq.com/shop/register/check";
+      String REGISTER_FINISH_ACCESS_INFO = "https://api.weixin.qq.com/shop/register/finish_access_info";
+      String REGISTER_APPLY_SCENE = "https://api.weixin.qq.com/shop/register/apply_scene";
+    }
+
+    interface Account {
+      String GET_CATEGORY_LIST = "https://api.weixin.qq.com/shop/account/get_category_list";
+      String GET_BRAND_LIST = "https://api.weixin.qq.com/shop/account/get_brand_list";
+      String UPDATE_INFO = "https://api.weixin.qq.com/shop/account/update_info";
+      String GET_INFO = "https://api.weixin.qq.com/shop/account/get_info";
+    }
+
+    interface Cat {
+      String GET_CAT = "https://api.weixin.qq.com/shop/cat/get";
+    }
+
+    interface Img {
+      String IMG_UPLOAD = "https://api.weixin.qq.com/shop/img/upload";
+    }
+
+    interface Audit {
+      String AUDIT_BRAND = "https://api.weixin.qq.com/shop/audit/audit_brand";
+      String AUDIT_CATEGORY = "https://api.weixin.qq.com/shop/audit/audit_category";
+      String AUDIT_RESULT = "https://api.weixin.qq.com/shop/audit/result";
+      String GET_MINIAPP_CERTIFICATE = "https://api.weixin.qq.com/shop/audit/get_miniapp_certificate";
+    }
+
+    interface Delivery {
+      String GET_COMPANY_LIST = "https://api.weixin.qq.com/shop/delivery/get_company_list";
+      String DELIVERY_SEND = "https://api.weixin.qq.com/shop/delivery/send";
+      String DELIVERY_RECEIVE  = "https://api.weixin.qq.com/shop/delivery/recieve";
+    }
+
+    interface Aftersale {
+      String AFTERSALE_ADD = "https://api.weixin.qq.com/shop/aftersale/add";
+      String AFTERSALE_GET = "https://api.weixin.qq.com/shop/aftersale/get";
+      String AFTERSALE_UPDATE  = "https://api.weixin.qq.com/shop/aftersale/update";
     }
   }
 
@@ -345,5 +391,9 @@ public class WxMaApiUrlConstants {
      * 报销方批量更新发票状态
      */
     String UPDATE_STATUS_BATCH = "https://api.weixin.qq.com/card/invoice/reimburse/updatestatusbatch";
+  }
+
+  public interface Internet{
+    String GET_USER_ENCRYPT_KEY = "https://api.weixin.qq.com/wxa/business/getuserencryptkey";
   }
 }

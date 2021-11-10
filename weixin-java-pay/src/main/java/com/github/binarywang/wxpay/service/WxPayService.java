@@ -174,6 +174,12 @@ public interface WxPayService {
   InputStream downloadV3(String url) throws WxPayException;
 
   /**
+   * 获取微信签约代扣服务类
+   * @return entrust service
+   */
+  WxEntrustPapService getWxEntrustPapService();
+
+  /**
    * 获取企业付款服务类.
    *
    * @return the ent pay service
@@ -691,11 +697,11 @@ public interface WxPayService {
    * 接口链接：https://api.mch.weixin.qq.com/v3/refund/domestic/refunds/{out_refund_no}
    * </pre>
    *
-   * @param outTradeNo 商户订单号
+   * @param outRefundNo 商户退款单号
    * @return 退款信息 wx pay refund query result
    * @throws WxPayException the wx pay exception
    */
-  WxPayRefundQueryV3Result refundQueryV3(String outTradeNo) throws WxPayException;
+  WxPayRefundQueryV3Result refundQueryV3(String outRefundNo) throws WxPayException;
 
   /**
    * <pre>
